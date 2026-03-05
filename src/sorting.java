@@ -87,6 +87,59 @@ class sorts{
         merge(arr, low, mid, high);
 
     }
+
+
+    public void recBubbleSort(int[] arr, int n){
+        boolean swapped = false;
+        if(n==1 || swapped)
+
+            return;
+        for(int i =0;i<= n -2; i++){
+            if(arr[i]>arr[i+1]){
+                int temp = arr[i];
+                arr[i]= arr[i+1];
+                arr[i+1] = temp;
+                swapped = true;
+            }
+        }
+
+        recBubbleSort(arr,n-1);
+    }
+
+
+    public void quickSort(int[] arr, int low,int high){
+        if (low < high) {
+            // Find pivot index
+            int pivotIndex = partition(arr, low, high);
+
+            // Sort left subarray
+            quickSort(arr, low, pivotIndex - 1);
+
+            // Sort right subarray
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    private int partition(int[] arr, int low, int high){
+        int pivot = arr[high];
+
+        int i = low-1;
+
+        for(int j = low;j<high;j++){
+            if(arr[j]<pivot){
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        // Return pivot index
+        return i + 1;
+    }
 }
 
 
@@ -96,7 +149,8 @@ public class sorting {
         int [] arr = {1,8,3,4,5};
         sorts obj = new sorts();
 //        obj.bubbleSor(arr);
-        obj.mergeSort(arr, 0, arr.length - 1);
+        int n = arr.length;
+        obj.recBubbleSort(arr, arr.length );
         for (int num : arr)
             System.out.print(num + " ");
         System.out.println();
